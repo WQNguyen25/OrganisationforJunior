@@ -1,4 +1,3 @@
-
 // Display stored times on page load
 window.addEventListener('DOMContentLoaded', function() {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
@@ -79,11 +78,22 @@ window.addEventListener('DOMContentLoaded', function() {
 
             localStorage.setItem('selectedTimes' + day, JSON.stringify(selectedTimes));
             displayTimes(selectedTimes, 'output' + day);
-            updateMatches();
+            // Removed updateMatches() call here since matches are now on separate page
         });
     });
 
-    updateMatches();
+    // Handle general submit button
+    const generalSubmit = document.getElementById('generalSubmit');
+    if (generalSubmit) {
+        generalSubmit.addEventListener('click', function() {
+            window.location.href = 'matches.html';
+        });
+    }
+
+    // If on matches page, display matches
+    if (document.getElementById('matchResults')) {
+        updateMatches();
+    }
 });
 
 function displayTimes(times, outputId) {
@@ -97,5 +107,7 @@ function displayTimes(times, outputId) {
         outputDiv.innerHTML = 'No time selected';
     }
 }
+
+
 
 

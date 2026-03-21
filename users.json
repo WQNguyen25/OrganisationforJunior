@@ -22,5 +22,9 @@
   {
     "username": "Username",
     "password": "Password"
+  },
+  {
+    "username": "hashTest",
+    "password": "$2b$10$sW9.cGKicKuy3.uf0/dLcePd9DxDf19xfbw8ga2KhFKUCX3mm22LS"
   }
 ]

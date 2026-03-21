@@ -30,5 +30,9 @@
   {
     "username": "ewtetert",
     "password": "$2b$10$.SdIocRR02soDeyxeG9AlODf5UCLEee5z2VM.D6OwFMahqjvn3MMC"
+  },
+  {
+    "username": "test",
+    "password": "$2b$10$ReVEMDBMZEaN5LFffqYDKuhc8Vv1ls601Msl8uptUlO/znKcxXjQ6"
   }
 ]

@@ -1,23 +1,40 @@
 
-document.getElementById("timeForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // stop page reload
+// Display stored times on page load
+window.addEventListener('DOMContentLoaded', function() {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
-    const selectedTimes = [];
+    days.forEach(day => {
+        // Display stored times for each day
+        const storedTimes = JSON.parse(localStorage.getItem('selectedTimes' + day) || '[]');
+        displayTimes(storedTimes, 'output' + day);
 
-    document.querySelectorAll('input[name="time"]:checked').forEach((checkbox) => {
-        selectedTimes.push(checkbox.value);
+        // Add event listener for each form
+        document.getElementById("timeForm" + day).addEventListener("submit", function(event) {
+            event.preventDefault(); // stop page reload
+
+            const selectedTimes = [];
+            this.querySelectorAll('input[name="time[]"]:checked').forEach((checkbox) => {
+                selectedTimes.push(checkbox.value);
+            });
+
+            console.log("Selected times for " + day + ":", selectedTimes);
+            
+            // Store the selected times in localStorage
+            localStorage.setItem('selectedTimes' + day, JSON.stringify(selectedTimes));
+
+            // Display values
+            displayTimes(selectedTimes, 'output' + day);
+        });
     });
+});
 
-    console.log("Selected times:", selectedTimes);
-    
+function displayTimes(times, outputId) {
+    const outputDiv = document.getElementById(outputId);
 
-        // Display values
-    const outputDiv = document.getElementById("output");
-
-    if (selectedTimes.length > 0) {
-        outputDiv.innerHTML = "You selected: " + selectedTimes.join(", ") + "am";
+    if (times.length > 0) {
+        outputDiv.innerHTML = "Selected times: " + times.join(", ");
     } else {
         outputDiv.innerHTML = "No time selected";
     }
-});
+}
 

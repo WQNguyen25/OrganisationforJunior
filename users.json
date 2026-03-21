@@ -34,5 +34,17 @@
   {
     "username": "test",
     "password": "$2b$10$ReVEMDBMZEaN5LFffqYDKuhc8Vv1ls601Msl8uptUlO/znKcxXjQ6"
+  },
+  {
+    "username": "test1",
+    "password": "$2b$10$hEY.phLxjSn3HbzdYwQxUeYHKVNyc6pQ6EXtG5aycxSvkXDHvIHKC"
+  },
+  {
+    "username": "Faggot123",
+    "password": "$2b$10$WHd0jdm31yCqR0BcCuuqCeVAwVlRDM9lAR2sh/KQ7y36wYUm378gm"
+  },
+  {
+    "username": "iujkrefdsz123",
+    "password": "$2b$10$mHggOLoM0ALD7a4fVFZAfOBzAwFNSrQsjGPzHT2BKW72aMagNCLtG"
   }
 ]

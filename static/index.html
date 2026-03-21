@@ -50,17 +50,7 @@
     <p id="greeting"></p>
     <p id="passDisplay"></p>
 
-    <script>
-        window.onsubmit = function () {
-            const name = localStorage.getItem("userDisplayName");
-            const pass = localStorage.getItem("userPassword"); // Retrieve password
-
-            if (name) {
-                document.getElementById("greeting").textContent = `Hello, ${name}`;
-                document.getElementById("passDisplay").textContent = `Your password is: ${pass}`;
-            }
-        };
-    </script>
+    
 
 </body>
 

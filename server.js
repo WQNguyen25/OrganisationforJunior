@@ -24,7 +24,7 @@ function getUsers() {
 }
 
 // ROUTE 1: REGISTER (Sign Up)
-app.post('/register', (req, res) => {
+app.post('/register', async (req, res) => {
     const { user, pass } = req.body;
     const users = getUsers();
 
@@ -34,29 +34,32 @@ app.post('/register', (req, res) => {
         return res.json({ success: false, message: "Username already taken!" });
     }
 
-        
-    // Save new user
-    users.push({ username: user, password: pass });
-    fs.writeFileSync(filePath, JSON.stringify(users, null, 2));
 
+    // Save new user
+    const hashedPassword = await bcrypt.hash(pass, 10);
+
+    // Save the plain username but the SCRAMBLED password
+    users.push({ username: user, password: hashedPassword });
+    fs.writeFileSync(filePath, JSON.stringify(users, null, 2));
     res.json({ success: true, message: "Account created successfully!" });
 });
 
 // ROUTE 2: LOGIN (Sign In)
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const { user, pass } = req.body;
     const users = getUsers();
-
-    // Find the user in our list
     const foundUser = users.find(u => u.username === user);
 
-    if (foundUser && foundUser.password === pass) {
-        // Match found!
-        res.json({ success: true, message: `Welcome back, ${user}!` });
-    } else {
-        // No match or wrong password
-        res.json({ success: false, message: "Invalid username or password." });
+    if (foundUser) {
+        // 'await' is needed here too for bcrypt.compare
+        const match = await bcrypt.compare(pass, foundUser.password);
+        if (match) {
+            return res.json({ success: true, message: "Welcome back!" });
+        }
     }
+    // No match or wrong password
+    res.json({ success: false, message: "Invalid username or password." });
+
 });
 
 app.listen(port, () => {

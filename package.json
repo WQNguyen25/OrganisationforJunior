@@ -1,0 +1,25 @@
+{
+  "name": "organisationforjunior",
+  "version": "1.0.0",
+  "description": "junior quackathon",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WQNguyen25/OrganisationforJunior.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/WQNguyen25/OrganisationforJunior/issues"
+  },
+  "homepage": "https://github.com/WQNguyen25/OrganisationforJunior#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

@@ -1,7 +1,9 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const app = express();
 const port = 3000;
+const bcrypt = require('bcrypt');
 
 // 1. Setup: This tells Express where your files are and how to read JSON
 app.use(express.static('static'));
@@ -13,26 +15,48 @@ app.get('/', (req, res) => {
 });
 
 // 3. Logic Route: This is the "Brain." It doesn't send a file; it sends DATA.
-const fs = require('fs'); // Add this at the top
+const filePath = path.join(__dirname, 'users.json');
 
-app.post('/login', (req, res) => {
+// Helper function to get users from the file
+function getUsers() {
+    const data = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(data);
+}
+
+// ROUTE 1: REGISTER (Sign Up)
+app.post('/register', (req, res) => {
     const { user, pass } = req.body;
-    const filePath = path.join(__dirname, 'users.json');
+    const users = getUsers();
 
-    // 1. Read the existing file
-    const fileData = fs.readFileSync(filePath, 'utf-8');
-    const users = JSON.parse(fileData);
+    // Check if user already exists
+    const exists = users.find(u => u.username === user);
+    if (exists) {
+        return res.json({ success: false, message: "Username already taken!" });
+    }
 
-    // 2. Add the new user to the list
+    
+    // Save new user
     users.push({ username: user, password: pass });
-
-    // 3. Save the updated list back to the file
     fs.writeFileSync(filePath, JSON.stringify(users, null, 2));
 
-    res.json({ 
-        success: true, 
-        message: `User ${user} has been saved to the JSON file!` 
-    });
+    res.json({ success: true, message: "Account created successfully!" });
+});
+
+// ROUTE 2: LOGIN (Sign In)
+app.post('/login', (req, res) => {
+    const { user, pass } = req.body;
+    const users = getUsers();
+
+    // Find the user in our list
+    const foundUser = users.find(u => u.username === user);
+
+    if (foundUser && foundUser.password === pass) {
+        // Match found!
+        res.json({ success: true, message: `Welcome back, ${user}!` });
+    } else {
+        // No match or wrong password
+        res.json({ success: false, message: "Invalid username or password." });
+    }
 });
 
 app.listen(port, () => {

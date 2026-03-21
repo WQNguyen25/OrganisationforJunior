@@ -28,6 +28,12 @@ app.post('/register', async (req, res) => {
     const { user, pass } = req.body;
     const users = getUsers();
 
+    if (!pass || pass.trim() === "") {
+        return res.json({ 
+            success: false, 
+            message: "Registration failed: Password is required." 
+        });
+    }
     // Check if user already exists
     const exists = users.find(u => u.username === user);
     if (exists) {

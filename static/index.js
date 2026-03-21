@@ -1,19 +1,24 @@
-document.getElementById("myForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Stops the page from refreshing
+document.getElementById("myForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-    // 1. Get values from the input boxes
-    const userName = document.getElementById("userName").value;
-    const userPass = document.getElementById("Password").value;
-    
-    // 2. Save them to localStorage (optional, if you need them later)
-    localStorage.setItem("userDisplayName", userName);
-    localStorage.setItem("userPassword", userPass);
+    const payload = {
+        user: document.getElementById("userName").value,
+        pass: document.getElementById("Password").value
+    };
 
-    // 3. Update the HTML elements right now
-    document.getElementById("greeting").textContent = `Hello, ${userName}`;
-    document.getElementById("passDisplay").textContent = `Your password is: ${userPass}`;
-    
-    // 4. Clear the input boxes (optional, for a clean look)
-    document.getElementById("userName").value = "";
-    document.getElementById("Password").value = "";
+    const response = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    });
+
+    const result = await response.json();
+
+    // Debugging: This will show you exactly what the server sent
+    console.log("Server response:", result);
+
+    if (result.success) {
+        // Use result.message because that's what we named it in server.js
+        document.getElementById("greeting").textContent = result.message;
+    }
 });

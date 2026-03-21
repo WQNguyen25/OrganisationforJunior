@@ -38,3 +38,15 @@ function displayTimes(times, outputId) {
     }
 }
 
+
+function calcBestTime() {
+    
+
+
+
+
+
+}
+
+
+

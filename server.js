@@ -34,7 +34,7 @@ app.post('/register', (req, res) => {
         return res.json({ success: false, message: "Username already taken!" });
     }
 
-    
+        
     // Save new user
     users.push({ username: user, password: pass });
     fs.writeFileSync(filePath, JSON.stringify(users, null, 2));

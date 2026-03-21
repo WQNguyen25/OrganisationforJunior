@@ -9,7 +9,12 @@ window.addEventListener('DOMContentLoaded', function() {
         { name: 'Emily Johnson', times: ['9.00', '11.00', '15.00'] },
         { name: 'Michael Smith', times: ['10.00', '12.00', '16.00'] },
         { name: 'Jessica Lee', times: ['9.00', '13.00', '14.00'] }, 
-        { name :'Mustafa Kemal', times: ['12.00','13.00']}
+        { name :'Mustafa Kemal', times: ['12.00','13.00']},
+        { name: 'Ben Dover', times: ['11.00', '14.00', '15.00'] },
+        { name: 'Temujin Borjigin', times: ['9.00', '10.00', '11.00'] },
+        
+        
+
     ];
     //method to get user times for a specific day from localStorage
     function getUserTimesForDay(day) {
@@ -106,8 +111,10 @@ function displayTimes(times, outputId) {
     } else {
         outputDiv.innerHTML = 'No time selected';
     }
+
+
+
 }
 
-
-
-
+function addFriend(){
+    const nameInput = document.getElementById('friendName');

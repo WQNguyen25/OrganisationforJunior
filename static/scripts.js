@@ -21,45 +21,49 @@ window.addEventListener('DOMContentLoaded', function() {
         return JSON.parse(localStorage.getItem('selectedTimes' + day) || '[]');
     }
 
-    //method to Update matches
-    function updateMatches() {
-        const matchResultsElement = document.getElementById('matchResults');
-        if (!matchResultsElement) return;
+    // Updated updateMatches to include a button
+function updateMatches() {
+    const matchResultsElement = document.getElementById('matchResults');
+    if (!matchResultsElement) return;
 
-        let hasSelection = false;
-        const sections = days.map(day => {
-            const userTimes = getUserTimesForDay(day);
-            if (userTimes.length === 0) {
-                return `<div><strong>${day}:</strong> No times selected.</div>`;
-            }
+    const friends = JSON.parse(localStorage.getItem('friendsList') || '[]');
+    let hasSelection = false;
 
-            hasSelection = true;
-            const matchedPeople = People.map(person => {
-                const shared = person.times.filter(time => userTimes.includes(time));
-                if (shared.length === 0) return null;
-                return `
-                    <div style="margin-bottom: 8px; padding:6px; border-left: 3px solid #0d6efd; background:#fff;">
+    const sections = days.map(day => {
+        const userTimes = getUserTimesForDay(day);
+        if (userTimes.length === 0) return `<div><strong>${day}:</strong> No times selected.</div>`;
+
+        hasSelection = true;
+        const matchedPeople = People.map(person => {
+            const shared = person.times.filter(time => userTimes.includes(time));
+            if (shared.length === 0) return null;
+
+            const isFriend = friends.includes(person.name);
+
+            return `
+                <div style="margin-bottom: 8px; padding:12px; border-left: 3px solid #0d6efd; background:#fff; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
                         <strong>${person.name}</strong><br>
-                        Available: ${person.times.join(', ')}<br>
-                        Matching: ${shared.join(', ')}
-                    </div>`;
-            }).filter(Boolean);
+                        <small>Available: ${person.times.join(', ')}</small><br>
+                        <strong>Matching: ${shared.join(', ')}</strong>
+                    </div>
+                    <button 
+                        onclick="addFriend('${person.name}')" 
+                        class="btn ${isFriend ? 'btn-success disabled' : 'btn-outline-primary'} btn-sm">
+                        ${isFriend ? 'Friends ✓' : 'Add Friend'}
+                    </button>
+                </div>`;
+        }).filter(Boolean);
 
-            if (matchedPeople.length === 0) {
-                return `<div><strong>${day}:</strong> No matching dummy people found for selected times (${userTimes.join(', ')}).</div>`;
-            }
-
-            return `<div><strong>${day} - Your times:</strong> ${userTimes.join(', ')}<br>${matchedPeople.join('')}</div>`;
-        });
-
-        if (!hasSelection) {
-            matchResultsElement.innerHTML = '<p>No selected times yet. Pick times in the forms to see matching people.</p>';
-            return;
+        if (matchedPeople.length === 0) {
+            return `<div><strong>${day}:</strong> No matches found.</div>`;
         }
 
-        matchResultsElement.innerHTML = sections.join('<hr>');
-    }
+        return `<div><h4 class="mt-3">${day}</h4>${matchedPeople.join('')}</div>`;
+    });
 
+    matchResultsElement.innerHTML = hasSelection ? sections.join('<hr>') : '<p>No times selected yet.</p>';
+}
     function refreshDay(day) {
         const storedTimes = JSON.parse(localStorage.getItem('selectedTimes' + day) || '[]');
         displayTimes(storedTimes, 'output' + day);
@@ -116,5 +120,18 @@ function displayTimes(times, outputId) {
 
 }
 
-function addFriend(){
-    const nameInput = document.getElementById('friendName');
+function addFriend(name){
+    // Get current friends from localStorage or empty array if none
+    let friends = JSON.parse(localStorage.getItem('friendsList') || '[]');
+
+    // Check if person is already a friend
+    if (!friends.includes(name)) {
+        friends.push(name);
+        localStorage.setItem('friendsList', JSON.stringify(friends));
+        alert(name + " has been added to your friends!");
+        // Refresh matches to update button state
+        updateMatches();
+    } else {
+        alert(name + " is already your friend.");
+    }
+}

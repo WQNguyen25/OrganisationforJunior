@@ -36,7 +36,6 @@
     "password": "$2b$10$ReVEMDBMZEaN5LFffqYDKuhc8Vv1ls601Msl8uptUlO/znKcxXjQ6"
   },
   {
-
     "username": "bobq",
     "password": "$2b$10$KQbXHoNQLVNCWZWuZ7G1BuTbL/ZriMIcNm2aHZjihcKApVe4DSTAi"
   },
@@ -71,6 +70,9 @@
   {
     "username": "iujkrefdsz123",
     "password": "$2b$10$mHggOLoM0ALD7a4fVFZAfOBzAwFNSrQsjGPzHT2BKW72aMagNCLtG"
-
+  },
+  {
+    "username": "temujin ",
+    "password": "$2b$10$rHHJrtajLsx8DdMhn8SKQ.55yF1lC3d.Gov1ieECHSlPzGoQD4LFu"
   }
 ]

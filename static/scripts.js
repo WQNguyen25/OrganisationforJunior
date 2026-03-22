@@ -1,37 +1,33 @@
 // Display stored times on page load
-window.addEventListener('DOMContentLoaded', function() {
-    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+const People = [
+    { name: 'Samuel Parks', times: ['9.00', '10.00', '14.00'] },
+    { name: 'Ryan Thompson', times: ['10.00', '11.00', '12.00'] },
+    { name: 'Francis Drake', times: ['12.00', '13.00', '14.00'] },
+    { name: 'Emily Johnson', times: ['9.00', '11.00', '15.00'] },
+    { name: 'Michael Smith', times: ['10.00', '12.00', '16.00'] },
+    { name: 'Jessica Lee', times: ['9.00', '13.00', '14.00'] }, 
+    { name :'Mustafa Kemal', times: ['12.00','13.00']},
+    { name: 'Ben Dover', times: ['11.00', '14.00', '15.00'] },
+    { name: 'Temujin Borjigin', times: ['9.00', '10.00', '11.00'] },
+];
 
-    const People = [
-        { name: 'Samuel Parks', times: ['9.00', '10.00', '14.00'] },
-        { name: 'Ryan Thompson', times: ['10.00', '11.00', '12.00'] },
-        { name: 'Francis Drake', times: ['12.00', '13.00', '14.00'] },
-        { name: 'Emily Johnson', times: ['9.00', '11.00', '15.00'] },
-        { name: 'Michael Smith', times: ['10.00', '12.00', '16.00'] },
-        { name: 'Jessica Lee', times: ['9.00', '13.00', '14.00'] }, 
-        { name :'Mustafa Kemal', times: ['12.00','13.00']},
-        { name: 'Ben Dover', times: ['11.00', '14.00', '15.00'] },
-        { name: 'Temujin Borjigin', times: ['9.00', '10.00', '11.00'] },
-        
-        
+//method to get user times for a specific day from localStorage
+function getUserTimesForDay(day) {
+    return JSON.parse(localStorage.getItem('selectedTimes' + day) || '[]');
+}
 
-    ];
-    //method to get user times for a specific day from localStorage
-    function getUserTimesForDay(day) {
-        return JSON.parse(localStorage.getItem('selectedTimes' + day) || '[]');
-    }
-
-    // Updated updateMatches to include a button
+// Updated updateMatches to include a button
 function updateMatches() {
     const matchResultsElement = document.getElementById('matchResults');
     if (!matchResultsElement) return;
 
     const friends = JSON.parse(localStorage.getItem('friendsList') || '[]');
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     let hasSelection = false;
 
     const sections = days.map(day => {
-        const userTimes = getUserTimesForDay(day);
-        if (userTimes.length === 0) return `<div><strong>${day}:</strong> No times selected.</div>`;
+        const userTimes = JSON.parse(localStorage.getItem('selectedTimes' + day) || '[]');
+        if (userTimes.length === 0) return null;
 
         hasSelection = true;
         const matchedPeople = People.map(person => {
@@ -40,30 +36,36 @@ function updateMatches() {
 
             const isFriend = friends.includes(person.name);
 
+            // Logic to switch buttons based on friendship status
+            const actionButton = isFriend 
+                ? `<button onclick="removeFriend('${person.name}')" class="btn btn-danger btn-sm">Remove Friend</button>`
+                : `<button onclick="addFriend('${person.name}')" class="btn btn-outline-primary btn-sm">Add Friend</button>`;
+
             return `
-                <div style="margin-bottom: 8px; padding:12px; border-left: 3px solid #0d6efd; background:#fff; display: flex; justify-content: space-between; align-items: center;">
+                <div style="margin-bottom: 10px; padding:12px; border-left: 4px solid #0d6efd; background:#fff; display: flex; justify-content: space-between; align-items: center; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
                     <div>
-                        <strong>${person.name}</strong><br>
-                        <small>Available: ${person.times.join(', ')}</small><br>
-                        <strong>Matching: ${shared.join(', ')}</strong>
+                        <strong style="font-size: 1.1em;">${person.name} ${isFriend ? '<span class="badge bg-success">Friend</span>' : ''}</strong><br>
+                        <small class="text-muted">Matches you at: ${shared.join(', ')}</small>
                     </div>
-                    <button 
-                        onclick="addFriend('${person.name}')" 
-                        class="btn ${isFriend ? 'btn-success disabled' : 'btn-outline-primary'} btn-sm">
-                        ${isFriend ? 'Friends ✓' : 'Add Friend'}
-                    </button>
+                    <div>${actionButton}</div>
                 </div>`;
         }).filter(Boolean);
 
-        if (matchedPeople.length === 0) {
-            return `<div><strong>${day}:</strong> No matches found.</div>`;
-        }
+        if (matchedPeople.length === 0) return null;
 
-        return `<div><h4 class="mt-3">${day}</h4>${matchedPeople.join('')}</div>`;
-    });
+        return `<div class="mb-4"><h4>${day}</h4>${matchedPeople.join('')}</div>`;
+    }).filter(Boolean);
 
-    matchResultsElement.innerHTML = hasSelection ? sections.join('<hr>') : '<p>No times selected yet.</p>';
+    if (!hasSelection || sections.length === 0) {
+        matchResultsElement.innerHTML = '<p class="text-center p-4">No matches found for your selected times.</p>';
+        return;
+    }
+
+    matchResultsElement.innerHTML = sections.join('');
 }
+
+window.addEventListener('DOMContentLoaded', function() {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     function refreshDay(day) {
         const storedTimes = JSON.parse(localStorage.getItem('selectedTimes' + day) || '[]');
         displayTimes(storedTimes, 'output' + day);
@@ -103,6 +105,11 @@ function updateMatches() {
     if (document.getElementById('matchResults')) {
         updateMatches();
     }
+
+    // If on friends page, display friends
+    if (document.getElementById('friendsDisplayList')) {
+        displayFriends();
+    }
 });
 
 function displayTimes(times, outputId) {
@@ -131,7 +138,48 @@ function addFriend(name){
         alert(name + " has been added to your friends!");
         // Refresh matches to update button state
         updateMatches();
+        // If on friends page, refresh friends list
+        if (document.getElementById('friendsDisplayList')) {
+            displayFriends();
+        }
     } else {
         alert(name + " is already your friend.");
     }
+}
+function removeFriend(name){
+    let friends = JSON.parse(localStorage.getItem('friendsList') || '[]');
+    
+    // Create a new array that includes everyone EXCEPT the person we're removing
+    friends = friends.filter(friend => friend !== name);
+    
+    localStorage.setItem('friendsList', JSON.stringify(friends));
+    
+    // Refresh the UI to show the "Add" button again
+    updateMatches();
+    
+    // If you have a dedicated friends list on the page, refresh that too
+    if (document.getElementById('friendsDisplayList')) {
+        displayFriends();
+    }
+}
+
+function displayFriends() {
+    const friendsListElement = document.getElementById('friendsDisplayList');
+    if (!friendsListElement) return;
+
+    const friends = JSON.parse(localStorage.getItem('friendsList') || '[]');
+
+    if (friends.length === 0) {
+        friendsListElement.innerHTML = '<li class="list-group-item">No friends added yet.</li>';
+        return;
+    }
+
+    const friendsHtml = friends.map(friend => `
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            ${friend}
+            <button onclick="removeFriend('${friend}')" class="btn btn-danger btn-sm">Remove</button>
+        </li>
+    `).join('');
+
+    friendsListElement.innerHTML = friendsHtml;
 }

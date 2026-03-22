@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organisation - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0d6efd;
+            background-image: url("duck-background-home.jpg");
+            /*https://pixabay.com/photos/duck-meet-ducks-rubber-ducks-4127713/*/
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+    </style>
+    <script src="scripts.js"></script>
+</head> 
+
+
+<body>
+    <header>
+        <nav class="navbar bg-custom navbar-expand-lg mb-3">
+            <div class="container-fluid">
+                <a href="#" class="navbar-brand text-white" >Home</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto text-white ">
+                        <li><a href="index.html" class="nav-link">Sign out</a></li>
+                        <li><a href="home.html" class="nav-link active" aria-current="page">Home</a></li>
+                        <li><a href="matches.html" class="nav-link">Matches</a></li>
+                        <li><a href="Friends.html" class="nav-link">Friends</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <header>
+            <div class="col-12">
+                <div class="row">
+                    <h1 class="text-center text-white">Time Selection for the Week</h1>
+                    <p class="text-center text-white">Select your available times for each weekday.</p>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h2>Monday</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="timeFormMonday">
+                            <div class="row">
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="9.00" class="form-check-input"> 9:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="10.00" class="form-check-input"> 10:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="11.00" class="form-check-input"> 11:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="12.00" class="form-check-input"> 12:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="13.00" class="form-check-input"> 13:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="14.00" class="form-check-input"> 14:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="15.00" class="form-check-input"> 15:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="16.00" class="form-check-input"> 16:00</label>
+                                </div>
+                            </div>
+                            <div id="outputMonday" class="mt-2"></div>
+                            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h2>Tuesday</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="timeFormTuesday">
+                            <div class="row">
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="9.00" class="form-check-input"> 9:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="10.00" class="form-check-input"> 10:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="11.00" class="form-check-input"> 11:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="12.00" class="form-check-input"> 12:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="13.00" class="form-check-input"> 13:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="14.00" class="form-check-input"> 14:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="15.00" class="form-check-input"> 15:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="16.00" class="form-check-input"> 16:00</label>
+                                </div>
+                            </div>
+                            <div id="outputTuesday" class="mt-2"></div>
+                            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h2>Wednesday</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="timeFormWednesday">
+                            <div class="row">
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="9.00" class="form-check-input"> 9:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="10.00" class="form-check-input"> 10:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="11.00" class="form-check-input"> 11:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="12.00" class="form-check-input"> 12:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="13.00" class="form-check-input"> 13:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="14.00" class="form-check-input"> 14:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="15.00" class="form-check-input"> 15:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="16.00" class="form-check-input"> 16:00</label>
+                                </div>
+                            </div>
+                            <div id="outputWednesday" class="mt-2"></div>
+                            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h2>Thursday</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="timeFormThursday">
+                            <div class="row">
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="9.00" class="form-check-input"> 9:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="10.00" class="form-check-input"> 10:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="11.00" class="form-check-input"> 11:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="12.00" class="form-check-input"> 12:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="13.00" class="form-check-input"> 13:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="14.00" class="form-check-input"> 14:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="15.00" class="form-check-input"> 15:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="16.00" class="form-check-input"> 16:00</label>
+                                </div>
+                            </div>
+                            <div id="outputThursday" class="mt-2"></div>
+                            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h2>Friday</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="timeFormFriday">
+                            <div class="row">
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="9.00" class="form-check-input"> 9:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="10.00" class="form-check-input"> 10:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="11.00" class="form-check-input"> 11:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="12.00" class="form-check-input"> 12:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="13.00" class="form-check-input"> 13:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="14.00" class="form-check-input"> 14:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="15.00" class="form-check-input"> 15:00</label>
+                                </div>
+                                <div class="col-6 col-md-3 mb-2">
+                                    <label class="form-check-label"><input type="checkbox" name="time[]" value="16.00" class="form-check-input"> 16:00</label>
+                                </div>
+                            </div>
+                            <div id="outputFriday" class="mt-2"></div>
+                            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button id="generalSubmit" class="btn btn-primary btn-lg mt-3">Find Matches</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

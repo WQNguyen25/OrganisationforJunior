@@ -1,29 +1,5 @@
 [
   {
-    "username": "bob",
-    "password": "123"
-  },
-  {
-    "username": "bob312476",
-    "password": "1234"
-  },
-  {
-    "username": "ColourBlindFuck",
-    "password": "IAmEwan"
-  },
-  {
-    "username": "Bob",
-    "password": "3QOIJPOYRHG"
-  },
-  {
-    "username": "Bob4",
-    "password": "Password"
-  },
-  {
-    "username": "Username",
-    "password": "Password"
-  },
-  {
     "username": "hashTest",
     "password": "$2b$10$sW9.cGKicKuy3.uf0/dLcePd9DxDf19xfbw8ga2KhFKUCX3mm22LS"
   },
@@ -62,10 +38,6 @@
   {
     "username": "test1",
     "password": "$2b$10$hEY.phLxjSn3HbzdYwQxUeYHKVNyc6pQ6EXtG5aycxSvkXDHvIHKC"
-  },
-  {
-    "username": "Faggot123",
-    "password": "$2b$10$WHd0jdm31yCqR0BcCuuqCeVAwVlRDM9lAR2sh/KQ7y36wYUm378gm"
   },
   {
     "username": "iujkrefdsz123",

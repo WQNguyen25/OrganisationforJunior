@@ -36,6 +36,7 @@
     "password": "$2b$10$ReVEMDBMZEaN5LFffqYDKuhc8Vv1ls601Msl8uptUlO/znKcxXjQ6"
   },
   {
+<<<<<<< HEAD
     "username": "bobq",
     "password": "$2b$10$KQbXHoNQLVNCWZWuZ7G1BuTbL/ZriMIcNm2aHZjihcKApVe4DSTAi"
   },
@@ -58,5 +59,17 @@
   {
     "username": "qwa",
     "password": "$2b$10$lDGt5xQ7sNFSqS01M67DkeEe8DL2LMmROS/uPecx0ItRmCzddpqyu"
+=======
+    "username": "test1",
+    "password": "$2b$10$hEY.phLxjSn3HbzdYwQxUeYHKVNyc6pQ6EXtG5aycxSvkXDHvIHKC"
+  },
+  {
+    "username": "Faggot123",
+    "password": "$2b$10$WHd0jdm31yCqR0BcCuuqCeVAwVlRDM9lAR2sh/KQ7y36wYUm378gm"
+  },
+  {
+    "username": "iujkrefdsz123",
+    "password": "$2b$10$mHggOLoM0ALD7a4fVFZAfOBzAwFNSrQsjGPzHT2BKW72aMagNCLtG"
+>>>>>>> 6804cab0df5aeac4d4356f5757ccb983c93b676b
   }
 ]
